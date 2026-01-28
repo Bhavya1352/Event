@@ -1,0 +1,253 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
+All colors MUST be HSL.
+*/
+
+@layer base {
+  :root {
+    /* Modern elegant palette inspired by CherishX */
+    --background: 0 0% 100%;
+    --foreground: 0 0% 9%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 0 0% 9%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 0 0% 9%;
+
+    /* Rich pink/purple theme */
+    --primary: 330 81% 60%;
+    --primary-foreground: 0 0% 100%;
+    --primary-light: 330 81% 85%;
+    --primary-dark: 330 81% 45%;
+
+    --secondary: 0 0% 96%;
+    --secondary-foreground: 0 0% 9%;
+
+    --muted: 0 0% 96%;
+    --muted-foreground: 0 0% 45%;
+
+    --accent: 45 100% 70%;
+    --accent-foreground: 0 0% 9%;
+
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 98%;
+
+    --border: 0 0% 90%;
+    --input: 0 0% 90%;
+    --ring: 330 81% 60%;
+
+    --radius: 0.75rem;
+
+    /* Custom design tokens */
+    --gradient-primary: linear-gradient(135deg, hsl(330 81% 60%), hsl(270 81% 60%));
+    --gradient-secondary: linear-gradient(135deg, hsl(45 100% 70%), hsl(30 100% 70%));
+    --gradient-hero: linear-gradient(135deg, hsl(330 81% 60% / 0.9), hsl(270 81% 60% / 0.9));
+    
+    --shadow-elegant: 0 10px 40px -10px hsl(330 81% 60% / 0.3);
+    --shadow-glow: 0 0 50px hsl(330 81% 60% / 0.4);
+    
+    --transition-smooth: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-bounce: all 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+
+    --sidebar-background: 0 0% 98%;
+    --sidebar-foreground: 240 5.3% 26.1%;
+    --sidebar-primary: 240 5.9% 10%;
+    --sidebar-primary-foreground: 0 0% 98%;
+    --sidebar-accent: 240 4.8% 95.9%;
+    --sidebar-accent-foreground: 240 5.9% 10%;
+    --sidebar-border: 220 13% 91%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+
+  .dark {
+    --background: 0 0% 9%;
+    --foreground: 0 0% 98%;
+
+    --card: 0 0% 9%;
+    --card-foreground: 0 0% 98%;
+
+    --popover: 0 0% 9%;
+    --popover-foreground: 0 0% 98%;
+
+    --primary: 330 81% 70%;
+    --primary-foreground: 0 0% 9%;
+    --primary-light: 330 81% 85%;
+    --primary-dark: 330 81% 55%;
+
+    --secondary: 0 0% 15%;
+    --secondary-foreground: 0 0% 98%;
+
+    --muted: 0 0% 15%;
+    --muted-foreground: 0 0% 65%;
+
+    --accent: 45 100% 60%;
+    --accent-foreground: 0 0% 9%;
+
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 98%;
+
+    --border: 0 0% 20%;
+    --input: 0 0% 20%;
+    --ring: 330 81% 70%;
+
+    --gradient-primary: linear-gradient(135deg, hsl(330 81% 70%), hsl(270 81% 70%));
+    --gradient-secondary: linear-gradient(135deg, hsl(45 100% 60%), hsl(30 100% 60%));
+    --gradient-hero: linear-gradient(135deg, hsl(330 81% 70% / 0.9), hsl(270 81% 70% / 0.9));
+    
+    --shadow-elegant: 0 10px 40px -10px hsl(330 81% 70% / 0.4);
+    --shadow-glow: 0 0 50px hsl(330 81% 70% / 0.5);
+
+    --sidebar-background: 240 5.9% 10%;
+    --sidebar-foreground: 240 4.8% 95.9%;
+    --sidebar-primary: 224.3 76.3% 48%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 240 3.7% 15.9%;
+    --sidebar-accent-foreground: 240 4.8% 95.9%;
+    --sidebar-border: 240 3.7% 15.9%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+
+  /* Explosion Animation Keyframes */
+  @keyframes bomb-explosion {
+    0% {
+      transform: scale(0.8) rotate(0deg);
+      opacity: 1;
+    }
+    50% {
+      transform: scale(1.2) rotate(180deg);
+      opacity: 0.8;
+    }
+    100% {
+      transform: scale(20) rotate(360deg);
+      opacity: 0;
+    }
+  }
+
+  @keyframes particles-burst {
+    0% {
+      transform: scale(0) rotate(0deg);
+      opacity: 1;
+    }
+    50% {
+      transform: scale(1.5) rotate(180deg);
+      opacity: 0.7;
+    }
+    100% {
+      transform: scale(3) rotate(360deg);
+      opacity: 0;
+    }
+  }
+
+  @keyframes flash-white {
+    0% { background: transparent; }
+    10% { background: rgba(255, 255, 255, 0.9); }
+    20% { background: rgba(255, 255, 255, 0.7); }
+    100% { background: transparent; }
+  }
+
+    @keyframes zoom-in {
+    0% {
+      transform: scale(0.9) translateY(20px);
+      opacity: 0;
+    }
+    100% {
+      transform: scale(1) translateY(0);
+      opacity: 1;
+    }
+  }
+
+  .explosion-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: var(--gradient-primary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+    animation: flash-white 2s ease-out;
+  }
+
+  .bomb-emoji {
+    font-size: 8rem;
+    animation: bomb-explosion 2s ease-out forwards;
+  }
+
+  .content-enter {
+    animation: zoom-in 1s ease-out forwards;
+  }
+
+  /* Custom animations for the website */
+  @keyframes float {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-20px); }
+  }
+
+  @keyframes float-delay {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-15px); }
+  }
+
+  @keyframes float-delay-2 {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-25px); }
+  }
+
+  .animate-float {
+    animation: float 6s ease-in-out infinite;
+  }
+
+  .animate-float-delay {
+    animation: float-delay 8s ease-in-out infinite 2s;
+  }
+
+  .animate-float-delay-2 {
+    animation: float-delay-2 7s ease-in-out infinite 4s;
+  }
+
+  /* Bounce in animation for city selector */
+  @keyframes bounce-in {
+    0% {
+      transform: scale(0.3) translateY(-50px);
+      opacity: 0;
+    }
+    50% {
+      transform: scale(1.05) translateY(0);
+    }
+    70% {
+      transform: scale(0.9);
+    }
+    100% {
+      transform: scale(1);
+      opacity: 1;
+    }
+  }
+
+  .animate-bounce-in {
+    animation: bounce-in 0.6s ease-out;
+  }
+
+  /* Line clamp utility */
+  .line-clamp-3 {
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+  }
+}
