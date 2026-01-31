@@ -4,11 +4,18 @@ import { Search, Menu, X, ChevronDown, User, Sparkles } from 'lucide-react';
 import { useState, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import BookingModal from './BookingModal';
+import SearchResults from './SearchResults';
+import LoginModal from './LoginModal';
+import SignUpModal from './SignUpModal';
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isBookingModalOpen, setIsBookingModalOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  const [searchQuery, setSearchQuery] = useState('');
+  const [isSearchOpen, setIsSearchOpen] = useState(false);
+  const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
+  const [isSignUpModalOpen, setIsSignUpModalOpen] = useState(false);
   const location = useLocation();
   const navigate = useNavigate();
 
@@ -33,6 +40,29 @@ const Header = () => {
 
   const handleBookNow = () => {
     setIsBookingModalOpen(true);
+  };
+
+  const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value;
+    setSearchQuery(value);
+    setIsSearchOpen(true); // Always open when typing
+  };
+
+  const handleSearchFocus = () => {
+    setIsSearchOpen(true); // Open when focused
+  };
+
+  const handleSearchClose = () => {
+    setIsSearchOpen(false);
+  };
+
+  const handleLoginClick = () => {
+    setIsLoginModalOpen(true);
+  };
+
+  const handleSwitchToSignUp = () => {
+    setIsLoginModalOpen(false);
+    setIsSignUpModalOpen(true);
   };
 
   return (
@@ -77,20 +107,42 @@ const Header = () => {
             <Input 
               type="text" 
               placeholder="Search services..." 
+              value={searchQuery}
+              onChange={handleSearchChange}
+              onFocus={handleSearchFocus}
+              onBlur={() => setTimeout(() => setIsSearchOpen(false), 200)}
               className="pl-10 pr-4 py-2 rounded-full border-2 border-pink-100 focus:border-pink-500 focus:ring-pink-500 w-48 focus:w-64 transition-all duration-300 bg-gray-50"
             />
             <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-pink-400 w-4 h-4" />
+            <SearchResults 
+              isOpen={isSearchOpen} 
+              onClose={handleSearchClose} 
+              searchQuery={searchQuery} 
+            />
           </div>
           
           <div className="relative group hidden md:block">
-            <button className="flex items-center gap-2 text-gray-700 hover:text-pink-600 font-semibold px-3 py-2 rounded-full hover:bg-pink-50 transition-all">
+            <button 
+              onClick={handleLoginClick}
+              className="flex items-center gap-2 text-gray-700 hover:text-pink-600 font-semibold px-3 py-2 rounded-full hover:bg-pink-50 transition-all"
+            >
               <div className="w-8 h-8 rounded-full bg-pink-100 flex items-center justify-center">
                 <User className="w-4 h-4 text-pink-600" />
               </div>
             </button>
             <div className="absolute top-full right-0 mt-2 w-44 bg-white rounded-2xl shadow-2xl border border-pink-100 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50 p-2">
-              <a href="/login" className="block px-4 py-2.5 text-gray-700 hover:bg-pink-50 hover:text-pink-600 rounded-xl transition-colors">Sign In</a>
-              <a href="/register" className="block px-4 py-2.5 text-gray-700 hover:bg-pink-50 hover:text-pink-600 rounded-xl transition-colors">Sign Up</a>
+              <button 
+                onClick={handleLoginClick}
+                className="block w-full text-left px-4 py-2.5 text-gray-700 hover:bg-pink-50 hover:text-pink-600 rounded-xl transition-colors"
+              >
+                Sign In
+              </button>
+              <button 
+                onClick={() => setIsSignUpModalOpen(true)}
+                className="block w-full text-left px-4 py-2.5 text-gray-700 hover:bg-pink-50 hover:text-pink-600 rounded-xl transition-colors"
+              >
+                Sign Up
+              </button>
             </div>
           </div>
           
@@ -133,6 +185,17 @@ const Header = () => {
       <BookingModal 
         isOpen={isBookingModalOpen} 
         onClose={() => setIsBookingModalOpen(false)} 
+      />
+      
+      <LoginModal 
+        isOpen={isLoginModalOpen} 
+        onClose={() => setIsLoginModalOpen(false)}
+        onSwitchToSignUp={handleSwitchToSignUp}
+      />
+      
+      <SignUpModal 
+        isOpen={isSignUpModalOpen} 
+        onClose={() => setIsSignUpModalOpen(false)} 
       />
     </>
   );
