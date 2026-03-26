@@ -116,8 +116,16 @@ const ServicesGrid = () => {
                 <div className={`absolute inset-0 ${service.hoverColor} opacity-0 group-hover:opacity-100 transition-all duration-500`} />
                 
                 {/* Price badge */}
-                <div className="absolute top-2 md:top-4 right-2 md:right-4 bg-white/90 backdrop-blur-sm px-2 py-1 md:px-3 md:py-1.5 rounded-full shadow-lg">
-                  <span className="text-pink-600 font-bold text-[10px] md:text-sm">{service.price}</span>
+                <div className="absolute top-2 md:top-4 right-2 md:right-4 flex flex-col items-end gap-2">
+                  <div className="bg-white/90 backdrop-blur-sm px-2 py-1 md:px-3 md:py-1.5 rounded-full shadow-lg">
+                    <span className="text-pink-600 font-bold text-[10px] md:text-sm">{service.price}</span>
+                  </div>
+                  {(index === 0 || index === 2 || index === 5) && (
+                    <div className="bg-gradient-to-r from-purple-600 to-pink-600 px-2 py-1 rounded-full shadow-lg flex items-center gap-1 animate-pulse">
+                      <Sparkles className="w-2 h-2 text-white" />
+                      <span className="text-[8px] md:text-[10px] text-white font-bold uppercase tracking-tighter">AI Recommended</span>
+                    </div>
+                  )}
                 </div>
                 
                 {/* Icon badge */}

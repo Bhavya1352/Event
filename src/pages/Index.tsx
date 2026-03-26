@@ -10,6 +10,10 @@ import CitySelector from '../components/CitySelector';
 import CategorySection from '../components/CategorySection';
 import Footer from '../components/Footer';
 import Testimonials from '../components/Testimonials';
+import { BudgetEstimator } from '../components/BudgetEstimator';
+import { AIPlanner } from '../components/AIPlanner';
+import { LiveBookings } from '../components/LiveBookings';
+
 
 const Index = () => {
   const [showContent, setShowContent] = useState(false);
@@ -40,10 +44,13 @@ const Index = () => {
           <CategorySection />
           <AboutUs />
           <ServicesGrid />
+          <BudgetEstimator />
           <CallToAction />
           <WhyChooseUs />
           <Testimonials />
           <Footer />
+          <AIPlanner />
+          <LiveBookings />
         </div>
       )}
     </>
